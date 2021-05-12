@@ -1,64 +1,48 @@
-def encrypt(letter, key):
+class CaesarCipher:
+    # this method encrypt the plain text
+    @staticmethod
+    def encrypt(string,key):
+        result = ""
+        for char in string:
+            if char == " ": 
+                result += " "
+                continue
+            if ord(char) > 96 :
+                result += chr((ord(char) + key - 97) % 26 + 97)
+            else:
+                result += chr((ord(char)+ key - 65) % 26 +65)
+            # acsii_value = ord(char)
+            # temp = acsii_value - 97 if acsii_value > 96 else acsii_value - 65
+            # new_ascii = (temp + key) % 26
+            # new_char = chr(new_ascii+97) if acsii_value > 96 else chr(new_ascii+65)
+            # result += new_char
+        return result
 
-    # must be single alphabetic character
-    if not letter.isalpha() or len(letter) != 1:
-        return letter
+    # this method decrypt cipher text
+    @staticmethod
+    def decrypt(string,key):
+        result = ""
+        for char in string:
+            if char == " ":
+                result += " "
+                continue
+            if ord(char) > 96 :
+                result += chr((ord(char) - key - 97) % 26 + 97)
+            else:
+                result += chr((ord(char) - key -65) % 65 +65)
+            # acsii_value = ord(char)
+            # temp = acsii_value - 97 if acsii_value > 96 else acsii_value - 65
+            # new_ascii  = (temp - key) % 26
+            # new_char = chr(new_ascii+97) if acsii_value > 96 else chr(new_ascii+65)
+            # result += new_char
+        return result
 
-    # convert to lowercase
-    letter = letter.lower()
-
-    # convert to numerical value 0 - 25
-    # a = 0, b = 1, ... z = 25
-    value = ord(letter) - 97
-
-    # apply key, number of characters to shift
-    value = (value + key) % 26
-
-    # return encrypted letter
-    return chr(value + 97)
-
-
-def decrypt(letter, key):
-
-    # must be single alphabetic character
-    if not letter.isalpha() or len(letter) != 1:
-        return letter
-
-    # convert to lowercase
-    letter = letter.lower()
-
-    # convert to numerical value 0 - 25
-    # a = 0, b = 1, ... z = 25
-    value = ord(letter) - 97
-
-    # apply key, number of characters to shift
-    value = (value - key) % 26
-
-    # return encrypted letter
-    return chr(value + 97)
-
-
-# number of characters to shift
-key = int(raw_input('Enter the secret key: '))
-
-# cipher
-print 'cipher ( {} )\n'.format(key)
-for letter in map(chr, range(97, 123)):
-    print '{} -> {}'.format(letter, encrypt(letter, key))
-print ''
-
-# message to encrypt
-plaintext = raw_input('Enter the plaintext message: ')
-print 'plaintext: {}\n'.format(plaintext)
-
-# encipher
-ciphertext = ''
-for letter in plaintext:
-    ciphertext += encrypt(letter, key)
-print 'ciphertext: {}\n'.format(ciphertext)
-
-# decipher
-plaintext2 = ''
-for letter in ciphertext:
-    plaintext2 += decrypt(letter, key)
-print 'plaintext2: {}'.format(plaintext2)
+#----Testing-------
+if __name__ == "__main__":    
+    String = "Hey i am a plain text"
+    key = 3
+    encrypted = CaesarCipher.encrypt(String,key)
+    decrypted = CaesarCipher.decrypt(encrypted,key)
+    print("Plain Text : ", String)
+    print("Encrypted : ", encrypted)
+    print("Decrypted : ", decrypted)
