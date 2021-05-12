@@ -18,8 +18,8 @@ def caesar_cipher(message, mode, key):
     return translated
 
 
-message = 'Bạn thật là thông minh'
-cipher = caesar_cipher(message, 'ENCRYPT', 10)
+message = 'DAIHOCTAINGUYENVAMOITRUONGHANOI'
+cipher = caesar_cipher(message, 'ENCRYPT', 20)
 print('Plain text:  ' + message)
 print('Cipher text: ' + cipher)
 
@@ -30,7 +30,7 @@ def caesar_crack(cipher):
         print('key = {0:<4}   {1}'.format(str(key), message))
 
 
-cipher = 'WKS URÔXQ ĐS ĐƯỢM RSRS'
+cipher = 'XUCBIWNUCHAOSYHPUGICNLOIHABUHIC'
 print('nnCipher text:', cipher)
 print('Available Message: n')
 caesar_crack(cipher)
